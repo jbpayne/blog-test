@@ -28,7 +28,7 @@
     let list = document.querySelector('#results > ul');
   
     if (articles.length === 0) {
-      list.innerHTML = 'none';
+      list.innerHTML = `Unable to find any article by an author matching "${document.location.search.split('=')[1]}".`;
     }
   
     else for (let article of articles) {

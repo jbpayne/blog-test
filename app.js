@@ -81,12 +81,12 @@ function createArticle(articleId, params, response) {
     title: params.title.trim(),
     body: params.body.trim()
   };
-  let articleDataFile = $path.join(articlesDir, articleId + ".json");
+  let articleDataFile = $path.join(articlesDir, `${articleId}.json`);
   fs.writeFile(articleDataFile, JSON.stringify(article), (err) => {
     if (err) {
       response.status(500).send(err);
     } else {
-      response.redirect('/articles');
+      response.redirect(`/search?author=${article.author}`);
     }
   });
 }
@@ -100,7 +100,7 @@ function allArticles() {
 
 
 function articleFilePath(articleId) {
-  return $path.join(articlesDir, articleId + ".json");
+  return $path.join(articlesDir, `${articleId}.json`);
 }
 
 function nextArticleId() {
@@ -108,6 +108,5 @@ function nextArticleId() {
 
   let id = articles[articles.length - 1].id;
 
-  let articleId = id + 1;
-  return articleId;
+  return id + 1;
 }
